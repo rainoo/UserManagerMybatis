@@ -1,3 +1,5 @@
+
+
 <p align="center">
     <a href="http://www.gittoy.com/">
         <img src="https://avatars3.githubusercontent.com/u/18376321" width="150">
@@ -38,6 +40,11 @@ UserManagerMybatis 是一个分布式 "可执行逻辑" 管理平台, 学习简�
 - 2、使用MODEL2 + MyBatis开发，部署在服务器的根目录下：http://localhost:8080/UserManagerMybatis/userlist.action
 - 3、使用MAVEN进行项目管理；
 - 4、Page分页使用拦截器设计实现。对于每一个MyBatis ID为ByPage结尾的ID进行拦截分页。
+
+
+## Development
+2016年中，我在github上创建第一个项目仓库并提交第一个commit，随之进行系统结构设计，UI选型，交互设计……
+2017年中，拾起了长达四年没有编程的手，开始重新上路……
 
 
 ## Communication
