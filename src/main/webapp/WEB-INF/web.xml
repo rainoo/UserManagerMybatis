@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name></display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>UserListServlet</servlet-name>
+    <servlet-class>com.gittoy.servlet.UserListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserListServlet</servlet-name>
+    <url-pattern>/userlist.action</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogicalDeleteOneServlet</servlet-name>
+    <servlet-class>com.gittoy.servlet.LogicalDeleteOneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogicalDeleteOneServlet</servlet-name>
+    <url-pattern>/deleteone.action</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogicalDeleteBatchServlet</servlet-name>
+    <servlet-class>com.gittoy.servlet.LogicalDeleteBatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogicalDeleteBatchServlet</servlet-name>
+    <url-pattern>/deletebatch.action</url-pattern>
+  </servlet-mapping>
+</web-app>

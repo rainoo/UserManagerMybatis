@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gittoy.dao.IUser">
+
+	<resultMap type="com.gittoy.bean.User" id="UserResult">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="username" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="IDCARD" jdbcType="VARCHAR" property="idcard" />
+		<result column="DELFLG" jdbcType="VARCHAR" property="delflg" />
+	</resultMap>
+
+	<select id="getUserList" parameterType="java.util.Map" resultMap="UserResult">
+		SELECT <include refid = "columns"/> from DL_USER
+		<where>
+			<if test="true">
+				and DELFLG != '1'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.name)">
+				and NAME=#{user.name}
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.mobile)">
+				and MOBILE like '%' #{user.mobile} '%'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.email)">
+				and EMAIL like '%' #{user.email} '%'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.idcard)">
+				and IDCARD like '%' #{user.idcard} '%'
+			</if>
+		</where>
+		order by ID limit #{page.dbIndex}, #{page.dbNumber}
+	</select>
+
+	<select id="count" parameterType="com.gittoy.bean.User" resultType="int">
+		SELECT count(*) from DL_USER
+		<where>
+			<if test="true">
+				and DELFLG != '1'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(name)">
+				and NAME=#{name}
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(mobile)">
+				and MOBILE like '%' #{mobile} '%'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(email)">
+				and EMAIL like '%' #{email} '%'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(idcard)">
+				and IDCARD like '%' #{idcard} '%'
+			</if>
+		</where>
+	</select>
+
+	<select id="getUserListByPage" parameterType="java.util.Map" resultMap="UserResult">
+		SELECT <include refid = "columns"/> from DL_USER
+		<where>
+			<if test="true">
+				and DELFLG != '1'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.name)">
+				and NAME=#{user.name}
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.mobile)">
+				and MOBILE like '%' #{user.mobile} '%'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.email)">
+				and EMAIL like '%' #{user.email} '%'
+			</if>
+			<if test="@com.gittoy.util.StringUtil@isNotNullOrEmpty(user.idcard)">
+				and IDCARD like '%' #{user.idcard} '%'
+			</if>
+		</where>
+		order by ID
+	</select>
+
+	<sql id="columns">ID, USERNAME, PASSWORD, NAME, MOBILE, EMAIL, IDCARD, DELFLG</sql>
+
+	<update id="logicalDeleteOne" parameterType="int">
+		UPDATE DL_USER set DELFLG = "1" where ID = #{_parameter}
+	</update>
+
+	<update id="logicalDeleteBatch" parameterType="java.util.List">
+		UPDATE DL_USER set DELFLG = "1" where ID in(
+			<foreach collection="list" item="item" separator=",">
+				#{item}
+			</foreach>
+		)
+	</update>
+</mapper>
